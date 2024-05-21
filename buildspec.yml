@@ -1,16 +1,23 @@
 version: 0.2
-
+ 
 phases:
+  install:
+    commands:
+      - echo Installing source NPM dependencies...
+      - npm install
   pre_build:
     commands:
-      - npm install
-
+      - echo Pre-build started
+      - npm audit fix || true
   build:
     commands:
-      - npm run build
-      - npm run deploy
-
+      - echo Build started
+  post_build:
+    commands:
+      - echo Post-build started
 artifacts:
-  baseDirectory: build
   files:
     - '**/*'
+cache:
+  paths:
+    - 'node_modules/**/*'
