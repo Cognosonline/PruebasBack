@@ -14,6 +14,6 @@ phases:
       - npx serverless deploy
 
 artifacts:
-  base-directory: ./
+  base-directory: ./src
   files:
     - '**/*'
