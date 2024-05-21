@@ -1,10 +1,10 @@
 service: express-app
- 
+
 provider:
   name: aws
   runtime: nodejs16.x
   region: us-east-1
- 
+
 functions:
   app:
     handler: src/lambda.handler
@@ -14,8 +14,7 @@ functions:
           method: any
       - http:
           path: /{proxy+}
-          method: any
- 
+
 package:
   exclude:
     - node_modules/**
@@ -26,10 +25,10 @@ package:
     - README.md
     - serverless.yml
     - buildspec.yml
- 
+
 plugins:
   - serverless-dotenv-plugin
- 
+
 custom:
   dotenv:
-    basePath: .
+    basePath: ./
