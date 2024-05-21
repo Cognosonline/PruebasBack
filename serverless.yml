@@ -1,26 +1,35 @@
-version: 0.2
+service: express-app
  
-phases:
-  install:
-    runtime-versions:
-      nodejs: 20
-    commands:
-      - echo Installing NPM dependencies...
-      - npm install -g serverless
-      - npm install
-  pre_build:
-    commands:
-      - echo Pre-build phase...
-      - npm audit fix || true
-      - npm install
-  build:
-    commands:
-      - echo Build phase...
-      - npx serverless deploy
-artifacts:
-  base-directory: ./
-  files:
-    - '**/*'
-cache:
-  paths:
-    - 'node_modules/**/*'
+provider:
+  name: aws
+  runtime: nodejs16.x
+  region: us-east-1
+ 
+functions:
+  app:
+    handler: src/lambda.handler
+    events:
+      - http:
+          path: /
+          method: any
+      - http:
+          path: /{proxy+}
+          method: any
+ 
+package:
+  exclude:
+    - node_modules/**
+    - build/**
+    - coverage/**
+    - .git/**
+    - .vscode/**
+    - README.md
+    - serverless.yml
+    - buildspec.yml
+ 
+plugins:
+  - serverless-dotenv-plugin
+ 
+custom:
+  dotenv:
+    basePath: .
