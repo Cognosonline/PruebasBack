@@ -1,0 +1,29 @@
+{
+  "name": "backend-app",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node src/app.js",
+    "build": "babel src -d build && npm run zip",
+    "zip": "7z a -r my-express-app.zip .",
+    "deploy": "serverless deploy",
+    "dev": "nodemon src/app.js"
+  },
+  "devDependencies": {
+    "serverless": "^3.0.0",
+    "serverless-dotenv-plugin": "^4.0.0",
+    "nodemon": "^2.0.15",
+    "babel-cli": "^6.26.0",
+    "babel-preset-env": "^1.7.0"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "aws-sdk": "^2.1624.0",
+    "aws-serverless-express": "^3.4.0",
+    "express": "^4.19.2"
+  }
+}
