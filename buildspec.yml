@@ -1,22 +1,19 @@
 version: 0.2
- 
+
 phases:
   install:
+    runtime-versions:
+      nodejs: 16
     commands:
-      - echo Installing NPM dependencies...
       - npm install -g serverless
-      - npm install
   pre_build:
     commands:
-      - echo Pre-build phase...
-      - npm audit fix || true
+      - npm install
   build:
     commands:
-      - echo Build phase...
-      - serverless deploy --stage dev
+      - npx serverless deploy
+
 artifacts:
+  base-directory: ./
   files:
     - '**/*'
-cache:
-  paths:
-    - 'node_modules/**/*'
